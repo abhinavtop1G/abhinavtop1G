@@ -47,14 +47,23 @@
 Second-year CSE student at **Thapar Institute of Engineering and Technology**, working
 across **deep learning, computer vision, and edge AI**.
 
-Most of what I build has to survive contact with messy inputs — satellite tiles,
-691K-row tabular datasets, live camera feeds on a Raspberry Pi. I care about the part
-after the notebook: getting a model to run somewhere constrained, and knowing whether
-the number it produced actually means anything.
+- 👥 **Core Developer, AI/ML Department** at Google Developer Groups, TIET
+  
+- ## 🛠️ Technical Skills
 
-- 👥 **Core Developer, AI/ML Department** at Google Developer Groups, TIET — I run
-  workshops and build starter ML projects for students newer than me
-- 💬 Ask me about **YOLO, DistilBERT, gradient boosting, or edge inference**
+**Languages & Core CS**
+`Python` `C++` · Data Structures & Algorithms · Object-Oriented Programming
+
+**AI & Machine Learning**
+`scikit-learn` `PyTorch` `TensorFlow` `Ultralytics YOLO` `OpenCV` `MediaPipe`
+`DistilBERT` `DeBERTa` `LangChain` `RAG`
+
+**Domains & Deployment**
+Machine Learning · Deep Learning · Computer Vision · Predictive Modelling ·
+Edge AI on Raspberry Pi
+
+**Tools**
+`Git` `GitHub` `VS Code` `Jupyter` `Microsoft Planetary Computer (STAC API)`
 
 ---
 
@@ -111,23 +120,6 @@ A complete edge-inference pipeline for intelligent traffic monitoring, deployed 
 
 ---
 
-## 🛠️ Technical Skills
-
-**Languages & Core CS**
-`Python` `C++` · Data Structures & Algorithms · Object-Oriented Programming
-
-**AI & Machine Learning**
-`scikit-learn` `PyTorch` `TensorFlow` `Ultralytics YOLO` `OpenCV` `MediaPipe`
-`DistilBERT` `DeBERTa` `LangChain` `RAG`
-
-**Domains & Deployment**
-Machine Learning · Deep Learning · Computer Vision · Predictive Modelling ·
-Edge AI on Raspberry Pi
-
-**Tools**
-`Git` `GitHub` `VS Code` `Jupyter` `Microsoft Planetary Computer (STAC API)`
-
----
 
 ## 🏆 Achievements
 
