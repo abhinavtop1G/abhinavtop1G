@@ -47,9 +47,11 @@
 Second-year CSE student at **Thapar Institute of Engineering and Technology**, working
 across **deep learning, computer vision, and edge AI**.
 
-- 👥 **Core Developer, AI/ML Department** at Google Developer Groups, TIET
+I like understanding why something works, not just getting it to work. Most of my time goes into AI and machine learning , building projects that matter and deliver from scratch to production.
+
+Outside of that I play chess at state level, which has taught me more about patience than any amount of debugging ever has.
   
-- ## 🛠️ Technical Skills
+## 🛠️ Technical Skills
 
 **Languages & Core CS**
 `Python` `C++` · Data Structures & Algorithms · Object-Oriented Programming
@@ -82,8 +84,6 @@ An independent verification system that cross-checks carbon-project claims again
 
 `Python` · `DistilBERT` · `scikit-learn` · `Sentinel-2` · `STAC API`
 
-🔗 **[View repository](<repo-link>)**
-
 ---
 
 ### 📊 Kaggle Playground Series S6E8 — Binary Classification, 691K Rows
@@ -100,8 +100,6 @@ hill-climbed 3-model blend at **0.96561 OOF AUC**.
 
 `Python` · `XGBoost` · `CatBoost` · `Optuna` · `PyTorch`
 
-🔗 **[View repository](<repo-link>)**
-
 ---
 
 ### 🚗 Real-Time Vehicle Detection — Edge AI for Smart Mobility
@@ -115,8 +113,6 @@ A complete edge-inference pipeline for intelligent traffic monitoring, deployed 
   inference at the edge
 
 `Python` · `YOLO` · `Ultralytics` · `OpenCV` · `Raspberry Pi`
-
-🔗 **[View repository](<repo-link>)**
 
 ---
 
