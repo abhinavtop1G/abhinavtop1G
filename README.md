@@ -38,8 +38,7 @@ I'm Abhinav, a second-year Computer Science student at **Thapar Institute of
 Engineering and Technology**, Patiala.
 
 I like understanding *why* something works, not just getting it to work. Most of my
-time goes into AI and machine learning — and a good chunk of it into helping students
-a year behind me get started with the same things.
+time goes into AI and machine learning 
 
 Outside of that I play chess at state level, which has taught me more about patience
 than any amount of debugging ever has.
