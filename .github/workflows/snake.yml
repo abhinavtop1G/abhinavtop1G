@@ -1,0 +1,35 @@
+name: Contribution snake
+
+# Draws the contribution graph being eaten by a snake, into the `output` branch.
+on:
+  schedule:
+    - cron: "0 4 * * *" # daily
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/snake.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  snake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-snake.svg?color_snake=#8a6223
+            dist/github-snake-dark.svg?palette=github-dark&color_snake=#e2cb9f
+
+      - uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: Update contribution snake
+          author: Abhinav Saini <abhinav.hustler1@gmail.com>
+          committer: Abhinav Saini <abhinav.hustler1@gmail.com>
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
