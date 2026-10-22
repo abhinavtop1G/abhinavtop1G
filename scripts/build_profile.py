@@ -1,4 +1,4 @@
-"""Build the profile card: a turning ASCII Earth beside a neofetch-style readout.
+"""Build the profile card: an ASCII portrait beside a neofetch-style readout.
 
 Writes dark_mode.svg and light_mode.svg. The GitHub numbers are fetched live
 (GitHub REST and GraphQL APIs) every time this runs; a scheduled workflow runs
@@ -213,11 +213,8 @@ THEMES = {
         "cc": "#484f58",
         "add": "#3fb950",
         "del": "#f85149",
-        "land": "#d8c49b",
-        "sea": "#3a4b63",
-        "orbit": "#55657c",
-        "home": "#ff7b72",
-        "sats": ["#e2cb9f", "#d9907e", "#a9c29b", "#93a3d6", "#e4b06a"],
+        "tones": ["#6b5d45", "#b09c76", "#f3e6c8"],
+        "scan": "#e2cb9f",
         "cursor": "#e2cb9f",
     },
     "light": {
@@ -229,11 +226,8 @@ THEMES = {
         "cc": "#b1bac4",
         "add": "#1a7f37",
         "del": "#cf222e",
-        "land": "#6e5a33",
-        "sea": "#a9b7c6",
-        "orbit": "#8d9aab",
-        "home": "#cf222e",
-        "sats": ["#9a7a3c", "#b3563f", "#4f7a45", "#4459a0", "#a8691b"],
+        "tones": ["#b9ab90", "#7a6338", "#2b2416"],
+        "scan": "#8a6223",
         "cursor": "#8a6223",
     },
 }
@@ -242,59 +236,74 @@ FONT = 14
 CW = 8.4  # monospace advance at 14px
 LH = 17
 PAD_X, PAD_Y = 24, 30
-GAP = 3  # columns between globe and readout
+GAP = 3  # columns between portrait and readout
+# The portrait is set smaller than the readout, so it has the rows a face needs.
+P_FONT = 9  # px, and also the distance between its rows
+P_CW = P_FONT * 0.6
+ROW_STEP = 0.045  # s between one portrait row and the one above it
+ROW_FADE = 0.7  # s for each row to fade in
+SCAN_H = 64  # px, the glow that leads the reveal up the portrait
 
 
-def render(theme, readout, globe):
+def render(theme, readout, portrait):
     t = THEMES[theme]
-    cols, rows, frames = globe["cols"], globe["rows"], globe["frames"]
-    readout_x = PAD_X + (cols + GAP) * CW
+    cols, rows = portrait["cols"], portrait["rows"]
+    pw, ph = cols * P_CW, rows * P_FONT
+    readout_x = PAD_X + pw + GAP * CW
     width = round(readout_x + WIDTH * CW + PAD_X)
     height = round(PAD_Y + len(readout) * LH + PAD_Y - LH / 2)
-    globe_y = PAD_Y + (len(readout) * LH - rows * LH) / 2
-    period = len(frames) * 0.5
-    step = 100 / len(frames)
+    # Centre the portrait on the readout's block of text.
+    block_top, block_h = PAD_Y - FONT * 0.8, (len(readout) - 1) * LH + FONT
+    py = block_top + (block_h - ph) / 2
+    reveal = rows * ROW_STEP
 
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,\'Courier New\',monospace" '
         f'width="{width}px" height="{height}px" font-size="{FONT}px" role="img" '
-        f'aria-label="Abhinav Saini: an ASCII Earth turning beside a terminal-style readout of skills, projects, contact and live GitHub stats">',
+        f'aria-label="Abhinav Saini: an ASCII portrait beside a terminal-style readout of skills, projects, contact and live GitHub stats">',
         "<style>",
         "@font-face{src:local('Consolas'),local('Consolas Bold');font-family:'ConsolasFallback';font-display:swap;"
         "-webkit-size-adjust:109%;size-adjust:109%;}",
         "text,tspan{white-space:pre;}",
         f".head{{fill:{t['head']};font-weight:bold}}.key{{fill:{t['key']}}}.value{{fill:{t['value']}}}"
         f".cc{{fill:{t['cc']}}}.add{{fill:{t['add']}}}.del{{fill:{t['del']}}}",
-        f".land{{fill:{t['land']}}}.sea{{fill:{t['sea']}}}.orbit{{fill:{t['orbit']}}}"
-        f".home{{fill:{t['home']};font-weight:bold}}",
-        *[f".sat{j}{{fill:{c};font-weight:bold}}" for j, c in enumerate(t["sats"])],
-        # The planet turns: one frame shown at a time, half a second each.
-        f".frame{{opacity:0;animation:spin {period}s step-end infinite}}",
-        f"@keyframes spin{{0%{{opacity:1}}{step:.4f}%{{opacity:0}}100%{{opacity:0}}}}",
+        *[f".t{j}{{fill:{c}}}" for j, c in enumerate(t["tones"])],
+        # The portrait fades in once, row by row, from the bottom up, led by a scan line.
+        f".pr{{font-size:{P_FONT}px;opacity:0;animation:rise {ROW_FADE}s ease-out forwards}}",
+        "@keyframes rise{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}",
+        f".scan{{opacity:0;animation:scan {reveal:.2f}s linear .3s forwards}}",
+        f"@keyframes scan{{0%{{opacity:0;transform:none}}8%{{opacity:1}}88%{{opacity:1}}"
+        f"100%{{opacity:0;transform:translateY(-{ph:.0f}px)}}}}",
         # The readout types itself in, line by line, once.
         ".ln{opacity:0;animation:type .35s ease-out forwards}",
         "@keyframes type{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}",
         f".cursor{{fill:{t['cursor']};animation:blink 1.1s step-end infinite}}",
         "@keyframes blink{50%{opacity:0}}",
-        "@media (prefers-reduced-motion:reduce){.frame{animation:none}.f0{opacity:1}.ln{animation:none;opacity:1}.cursor{animation:none}}",
+        "@media (prefers-reduced-motion:reduce){.pr,.ln{animation:none;opacity:1}.scan{display:none}.cursor{animation:none}}",
         "</style>",
         f'<rect width="{width}px" height="{height}px" fill="{t["bg"]}" stroke="{t["edge"]}" rx="15"/>',
+        "<defs>",
+        f'<linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{t["scan"]}" stop-opacity="0"/>'
+        f'<stop offset=".12" stop-color="{t["scan"]}" stop-opacity=".45"/><stop offset="1" stop-color="{t["scan"]}" stop-opacity="0"/></linearGradient>',
+        "</defs>",
     ]
 
-    for k, f in enumerate(frames):
-        delay = k * 0.5 - period
-        out.append(f'<g class="frame f{k}" style="animation-delay:{delay:.1f}s">')
-        for layer in ("sea", "orbit", "land"):
-            out.append(f'<text class="{layer}">')
-            for r, row in enumerate(f[layer]):
-                if row.strip():
-                    out.append(f'<tspan x="{PAD_X}" y="{globe_y + r * LH:.1f}">{escape(row)}</tspan>')
-            out.append("</text>")
-        for m in f["marks"]:
-            x = PAD_X + m["c"] * CW
-            y = globe_y + m["r"] * LH
-            out.append(f'<text class="{m["kind"]}" x="{x:.1f}" y="{y:.1f}">{escape(m["ch"])}</text>')
+    # One group per row, each tone its own layer of text; rows start from the bottom.
+    for r in range(rows):
+        chars, bands = portrait[theme]["chars"][r], portrait[theme]["bands"][r]
+        if not chars.strip():
+            continue
+        y = py + r * P_FONT + P_FONT * 0.8
+        delay = (rows - 1 - r) * ROW_STEP + 0.3
+        out.append(f'<g class="pr" style="animation-delay:{delay:.3f}s">')
+        for j in range(len(t["tones"])):
+            layer = "".join(ch if b == str(j) else " " for ch, b in zip(chars, bands)).rstrip()
+            if layer.strip():
+                out.append(f'<text class="t{j}" x="{PAD_X}" y="{y:.1f}">{escape(layer)}</text>')
         out.append("</g>")
+    out.append(
+        f'<rect class="scan" x="{PAD_X - 8}" y="{py + ph - SCAN_H * 0.12:.1f}" width="{pw + 16:.1f}" height="{SCAN_H}" fill="url(#scan)"/>'
+    )
 
     for i, parts in enumerate(readout):
         y = PAD_Y + i * LH
@@ -308,12 +317,12 @@ def render(theme, readout, globe):
 
 
 def main():
-    globe = json.loads((ROOT / "scripts" / "globe.json").read_text())
+    portrait = json.loads((ROOT / "scripts" / "portrait.json").read_text())
     stats = github_stats()
     print(json.dumps(stats))
     readout = lines(stats)
     for theme in THEMES:
-        (ROOT / f"{theme}_mode.svg").write_text(render(theme, readout, globe), encoding="utf-8")
+        (ROOT / f"{theme}_mode.svg").write_text(render(theme, readout, portrait), encoding="utf-8")
     print("wrote dark_mode.svg and light_mode.svg")
 
 
