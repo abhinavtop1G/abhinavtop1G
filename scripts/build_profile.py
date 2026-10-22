@@ -80,7 +80,7 @@ def contributed_count():
         return None
     query = (
         "query($login:String!){user(login:$login){repositoriesContributedTo("
-        "contributionTypes:[COMMIT,PULL_REQUEST,ISSUE,REPOSITORY],includeUserRepositories:false){totalCount}}}"
+        "contributionTypes:[COMMIT,PULL_REQUEST,ISSUE,REPOSITORY],includeUserRepositories:true){totalCount}}}"
     )
     status, data = request("https://api.github.com/graphql", {"query": query, "variables": {"login": USER}})
     try:
