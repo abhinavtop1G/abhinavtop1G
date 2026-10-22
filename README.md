@@ -47,10 +47,18 @@ ONNX Runtime, Ultralytics YOLO, MediaPipe, Jupyter.
   and demos that turn papers into code you can run
 - **State-level chess**, rated 1700+
 
+### Contributions
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-3d-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile-3d-contrib/profile-3d-light.svg">
+  <img alt="My GitHub contributions over the past year as a 3D calendar of blocks, with a radar of commits, reviews, pull requests and issues, and the languages I write in" src="./profile-3d-contrib/profile-3d-dark.svg">
+</picture>
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/abhinavtop1G/abhinavtop1G/output/github-snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/abhinavtop1G/abhinavtop1G/output/github-snake.svg">
   <img alt="My contribution graph being eaten by a snake" src="https://raw.githubusercontent.com/abhinavtop1G/abhinavtop1G/output/github-snake.svg">
 </picture>
 
-<sub>The card at the top is drawn by <a href="scripts/build_profile.py"><code>scripts/build_profile.py</code></a>: the portrait is my photo turned into glyphs by <a href="scripts/make_portrait.py"><code>make_portrait.py</code></a>, and a GitHub Action refreshes the stats every morning.</sub>
+<sub>The card at the top is drawn by <a href="scripts/build_profile.py"><code>scripts/build_profile.py</code></a>: the portrait is my photo turned into glyphs by <a href="scripts/make_portrait.py"><code>make_portrait.py</code></a>, and a GitHub Action refreshes the stats every morning. The 3D calendar is drawn by <a href="https://github.com/yoshi389111/github-profile-3d-contrib">github-profile-3d-contrib</a>, in the same colours.</sub>
