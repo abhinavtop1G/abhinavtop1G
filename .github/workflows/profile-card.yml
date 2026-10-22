@@ -44,5 +44,6 @@ jobs:
             echo "No change."
           else
             git commit -m "Update profile card"
+            git pull --rebase
             git push
           fi
