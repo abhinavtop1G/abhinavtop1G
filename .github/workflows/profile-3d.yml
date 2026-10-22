@@ -1,0 +1,45 @@
+name: 3D contributions
+
+# Draws the contribution calendar as 3D blocks, in the card's colours
+# (.github/profile-3d.json), into profile-3d-contrib/.
+on:
+  schedule:
+    - cron: "0 5 * * *" # daily, after the card and the snake
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/profile-3d.json"
+      - ".github/workflows/profile-3d.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-3d
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: yoshi389111/github-profile-3d-contrib@v0.9.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+          SETTING_JSON: .github/profile-3d.json
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name "Abhinav Saini"
+          git config user.email "abhinav.hustler1@gmail.com"
+          git add profile-3d-contrib
+          if git diff --cached --quiet; then
+            echo "No change."
+          else
+            git commit -m "Update 3D contributions"
+            git pull --rebase
+            git push
+          fi
