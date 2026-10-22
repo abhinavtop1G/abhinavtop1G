@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./dark_mode.svg">
     <source media="(prefers-color-scheme: light)" srcset="./light_mode.svg">
-    <img alt="Abhinav Saini: an ASCII Earth turning, with Patiala marked and five project satellites in orbit, beside a terminal readout of what I work on, my projects, contact details and live GitHub stats." src="./dark_mode.svg">
+    <img alt="Abhinav Saini: an ASCII portrait of me that fades in from the bottom up, beside a terminal readout of what I work on, my projects, contact details and live GitHub stats." src="./dark_mode.svg">
   </picture>
 </a>
 
@@ -53,4 +53,4 @@ ONNX Runtime, Ultralytics YOLO, MediaPipe, Jupyter.
   <img alt="My contribution graph being eaten by a snake" src="https://raw.githubusercontent.com/abhinavtop1G/abhinavtop1G/output/github-snake.svg">
 </picture>
 
-<sub>The card at the top is drawn by <a href="scripts/build_profile.py"><code>scripts/build_profile.py</code></a>: the Earth is the same point cloud my portfolio's globe uses, and a GitHub Action refreshes the stats every morning.</sub>
+<sub>The card at the top is drawn by <a href="scripts/build_profile.py"><code>scripts/build_profile.py</code></a>: the portrait is my photo turned into glyphs by <a href="scripts/make_portrait.py"><code>make_portrait.py</code></a>, and a GitHub Action refreshes the stats every morning.</sub>
