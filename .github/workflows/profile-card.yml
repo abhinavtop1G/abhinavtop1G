@@ -1,0 +1,48 @@
+name: Profile card
+
+# Rebuilds dark_mode.svg and light_mode.svg with today's GitHub numbers.
+on:
+  schedule:
+    - cron: "30 3 * * *" # daily, 09:00 IST
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - ".github/workflows/profile-card.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-card
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build the card
+        run: python scripts/build_profile.py
+        env:
+          # Add a STATS_TOKEN secret (a fine-grained token with read access)
+          # to count private repositories too; otherwise public ones only.
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name "Abhinav Saini"
+          git config user.email "abhinav.hustler1@gmail.com"
+          git add dark_mode.svg light_mode.svg
+          if git diff --cached --quiet; then
+            echo "No change."
+          else
+            git commit -m "Update profile card"
+            git push
+          fi
