@@ -61,4 +61,10 @@ ONNX Runtime, Ultralytics YOLO, MediaPipe, Jupyter.
   <img alt="My contribution graph being eaten by a snake" src="https://raw.githubusercontent.com/abhinavtop1G/abhinavtop1G/output/github-snake.svg">
 </picture>
 
-<sub>The card at the top is drawn by <a href="scripts/build_profile.py"><code>scripts/build_profile.py</code></a>: the portrait is my photo turned into glyphs by <a href="scripts/make_portrait.py"><code>make_portrait.py</code></a>, and a GitHub Action refreshes the stats every morning. The 3D calendar is drawn by <a href="https://github.com/yoshi389111/github-profile-3d-contrib">github-profile-3d-contrib</a>, in the same colours.</sub>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=abhinavtop1G&show_icons=true&bg_color=0d1117&border_color=30363d&title_color=f0f6fc&text_color=c9d1d9&icon_color=e2cb9f&ring_color=e2cb9f">
+  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=abhinavtop1G&show_icons=true&bg_color=f6f8fa&border_color=d0d7de&title_color=1f2328&text_color=1f2328&icon_color=8a6223&ring_color=8a6223">
+  <img alt="My GitHub stats: stars, commits, pull requests, issues and repositories contributed to, with the overall grade they add up to" src="https://github-readme-stats.vercel.app/api?username=abhinavtop1G&show_icons=true&bg_color=0d1117&border_color=30363d&title_color=f0f6fc&text_color=c9d1d9&icon_color=e2cb9f&ring_color=e2cb9f">
+</picture>
+
+<sub>The card at the top is drawn by <a href="scripts/build_profile.py"><code>scripts/build_profile.py</code></a>: the portrait is my photo turned into glyphs by <a href="scripts/make_portrait.py"><code>make_portrait.py</code></a>, and a GitHub Action refreshes the stats every morning. The 3D calendar is drawn by <a href="https://github.com/yoshi389111/github-profile-3d-contrib">github-profile-3d-contrib</a>, and the grade by <a href="https://github.com/anuraghazra/github-readme-stats">github-readme-stats</a>, in the same colours.</sub>
